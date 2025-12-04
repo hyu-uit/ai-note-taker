@@ -5,8 +5,10 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
+import { Alert } from "react-native";
 import { Note, DiscoverItem } from "../types/Note";
 import { api } from "../services/api";
+import { googleCalendar } from "../services/googleCalendar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface NotesContextType {
@@ -14,12 +16,15 @@ interface NotesContextType {
   loading: boolean;
   error: string | null;
   discoverItems: DiscoverItem[];
+  isCalendarConnected: boolean;
   addNote: (note: Note) => Promise<void>;
   deleteNote: (noteId: string) => Promise<void>;
   refreshNotes: () => Promise<void>;
   searchNotes: (query: string) => Promise<Note[]>;
   structureText: (text: string) => Promise<Note>;
   structureVoice: (audioUri: string) => Promise<Note>;
+  connectCalendar: (accessToken: string) => Promise<void>;
+  disconnectCalendar: () => Promise<void>;
 }
 
 const NotesContext = createContext<NotesContextType | undefined>(undefined);
@@ -31,14 +36,21 @@ export function NotesProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [discoverItems, setDiscoverItems] = useState<DiscoverItem[]>([]);
+  const [isCalendarConnected, setIsCalendarConnected] = useState(false);
 
   useEffect(() => {
     loadNotes();
+    checkCalendarConnection();
   }, []);
 
   useEffect(() => {
     generateDiscoverItems();
   }, [notes]);
+
+  const checkCalendarConnection = async () => {
+    const connected = await googleCalendar.isConnected();
+    setIsCalendarConnected(connected);
+  };
 
   const loadNotes = async () => {
     try {
@@ -123,11 +135,39 @@ export function NotesProvider({ children }: { children: ReactNode }) {
     setDiscoverItems(items.slice(0, 3));
   };
 
+  // Auto-create calendar event for meetings/events
+  const createCalendarEventIfNeeded = async (note: Note) => {
+    if (!isCalendarConnected) return;
+
+    // Only create events for meeting/event categories with a date
+    if (
+      (note.category === "meeting" || note.category === "event") &&
+      note.eventDate
+    ) {
+      const result = await googleCalendar.createEventFromNote(note);
+
+      if (result.success) {
+        // Show success feedback
+        Alert.alert(
+          "📅 Calendar Event Created",
+          `"${note.title}" has been added to your Google Calendar.`,
+          [{ text: "OK" }]
+        );
+      } else if (result.error) {
+        console.log("Failed to create calendar event:", result.error);
+        // Don't show error to user - calendar sync is optional
+      }
+    }
+  };
+
   const addNote = async (note: Note) => {
     try {
       const updatedNotes = [note, ...notes];
       setNotes(updatedNotes);
       await saveNotesLocally(updatedNotes);
+
+      // Auto-create calendar event
+      await createCalendarEventIfNeeded(note);
     } catch (err) {
       setError("Failed to save note");
       throw err;
@@ -185,6 +225,16 @@ export function NotesProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const connectCalendar = async (accessToken: string) => {
+    await googleCalendar.setTokensFromAuth(accessToken);
+    setIsCalendarConnected(true);
+  };
+
+  const disconnectCalendar = async () => {
+    await googleCalendar.clearTokens();
+    setIsCalendarConnected(false);
+  };
+
   return (
     <NotesContext.Provider
       value={{
@@ -192,12 +242,15 @@ export function NotesProvider({ children }: { children: ReactNode }) {
         loading,
         error,
         discoverItems,
+        isCalendarConnected,
         addNote,
         deleteNote,
         refreshNotes,
         searchNotes,
         structureText,
         structureVoice,
+        connectCalendar,
+        disconnectCalendar,
       }}
     >
       {children}

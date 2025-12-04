@@ -136,13 +136,31 @@ export function NoteCard({ note, onPress, linkedCount = 0 }: NoteCardProps) {
             {note.tags && note.tags.length > 0 && (
               <View style={styles.tagsPreview}>
                 {note.tags.slice(0, 2).map((tag, index) => (
-                  <Text
+                  <View
                     key={index}
-                    style={[styles.tagText, { color: colors.tint }]}
+                    style={[
+                      styles.tagBadge,
+                      { backgroundColor: colors.tint + "15" },
+                    ]}
                   >
-                    #{tag}
-                  </Text>
+                    <Text
+                      style={[styles.tagText, { color: colors.tint }]}
+                      numberOfLines={1}
+                    >
+                      {tag}
+                    </Text>
+                  </View>
                 ))}
+                {note.tags.length > 2 && (
+                  <Text
+                    style={[
+                      styles.moreTagsText,
+                      { color: colors.textSecondary },
+                    ]}
+                  >
+                    +{note.tags.length - 2}
+                  </Text>
+                )}
               </View>
             )}
           </View>
@@ -197,16 +215,30 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    gap: 8,
   },
   time: {
     fontSize: 12,
+    flexShrink: 0,
   },
   tagsPreview: {
     flexDirection: "row",
-    gap: 8,
+    alignItems: "center",
+    gap: 6,
+    flexShrink: 1,
+  },
+  tagBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 10,
+    maxWidth: 100,
   },
   tagText: {
-    fontSize: 12,
+    fontSize: 11,
+    fontWeight: "500",
+  },
+  moreTagsText: {
+    fontSize: 11,
     fontWeight: "500",
   },
 });

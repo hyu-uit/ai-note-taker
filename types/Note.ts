@@ -21,6 +21,7 @@ export interface Note {
   // Optional metadata extracted by AI (for filtering/display)
   eventDate?: string;
   eventTime?: string;
+  eventEndTime?: string;
   location?: string;
   attendees?: string[];
   dueDate?: string;

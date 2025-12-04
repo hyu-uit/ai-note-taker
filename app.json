@@ -11,7 +11,14 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSMicrophoneUsageDescription": "SmartNote AI needs access to your microphone to record voice notes"
+        "NSMicrophoneUsageDescription": "SmartNote AI needs access to your microphone to record voice notes",
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.534643703808-436ld038tb65jl52ud409rj0hdqthc21"
+            ]
+          }
+        ]
       },
       "bundleIdentifier": "com.vincent232.smartnoteai"
     },
