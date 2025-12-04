@@ -1,0 +1,97 @@
+1.
+Product Vision
+**Current idea:** Notes app with voice input + LLM structuring.
+**Elevated vision:** **SmartNote AI is your second brain that actively learns how you think.** It captures fleeting thoughts in any form—voice rambles, messy text, photos of whiteboards—and transforms them into interconnected knowledge that grows smarter over time. Unlike passive note apps, SmartNote AI understands context, surfaces relevant past notes when you need them, and helps you see connections you'd never notice alone.
+**One-liner:** "Capture chaos. Retrieve clarity."
+---
+2.
+Innovative Features (Beyond "AI for AI's sake")
+| Feature | Why It's Genuinely Useful |
+|---------|--------------------------|
+| **Thought Threading** | Links related notes automatically across days/weeks—surfaces "You wrote something similar on Oct 3" |
+| **Learning Mode** | Generates quiz questions from your notes to reinforce retention (spaced repetition) |
+| **Capture Context** | Records metadata (location, time, what app you were in) to help you remember *why* you wrote something |
+| **Voice Refinement** | Lets you ramble for 5 minutes, then presents a 3-bullet summary you can accept/edit |
+| **Contradiction Detection** | Alerts you when a new note conflicts with something you wrote before |
+| **Meeting Companion** | Real-time transcription that auto-extracts action items and decisions |
+---
+3.
+Problem Statement
+**The core problem:** Our best ideas come at inconvenient moments—in the shower, during commutes, half-asleep. By the time we can properly write them down, we've lost 80% of the insight. Traditional note apps require you to organize *while* capturing, which kills spontaneity.
+**Real-world examples:**
+A student attends a lecture, takes messy notes, then spends 2 hours reformatting them—or never reviews them at all
+A founder has a breakthrough idea at 2 AM, types gibberish into their phone, can't understand it the next day
+A professional takes meeting notes but can never find them when relevant topics come up months later
+---
+4.
+Unique Value Propositions
+| Competitor | Their Approach | SmartNote AI Difference |
+|------------|---------------|------------------------|
+| Apple Notes | Simple, fast capture | We add intelligence without adding friction |
+| Notion | Powerful but requires setup | We auto-structure; you just dump thoughts |
+| Otter.ai | Transcription focused | We synthesize, connect, and help you *learn* from notes |
+| Obsidian | Manual linking required | We auto-discover connections |
+**Core differentiator:** Zero-friction capture → Automatic structure → Active knowledge retrieval
+---
+5.
+Smart LLM Use-Cases
+1. **Semantic Search** - "Find my notes about pricing strategies" works even if you never wrote those words
+2. **Tone Transformation** - Turn casual voice rambles into professional documentation
+3. **Gap Detection** - "Your project plan mentions marketing but has no budget section"
+4. **Explain Like I'm 5** - Simplify complex notes for better understanding
+5. **Extract Actionables** - Pull tasks from freeform notes into a todo list
+6. **Daily Digest** - "Here's what you captured today and how it connects to your goals"
+---
+6.
+Feature Roadmap
+7.
+Portfolio Impact
+**What makes this impressive:**
+1. **Full-stack AI integration** - Voice → Transcription → LLM → Structured output
+2. **Real product thinking** - Solves genuine problem, not a tech demo
+3. **Polish matters** - Smooth animations, haptic feedback, native feel
+4. **Demonstrates range** - Audio handling, state management, API integration, UX design
+**Specific portfolio callouts:**
+"Reduced note organization time by ~70% through automatic structuring"
+"Built custom voice capture pipeline with real-time feedback"
+"Implemented semantic search without external vector database"
+---
+8.
+Risks & Mitigations
+| Risk | Mitigation |
+|------|------------|
+| LLM latency kills flow | Show immediate transcription, structure in background |
+| Overstructuring loses voice | Always preserve original, show structured as "suggestion" |
+| Privacy concerns | Local-first option, clear data policies, on-device processing for sensitive notes |
+| Feature creep | Ruthless MVP focus—nail voice→structure before adding bells |
+| Cost of API calls | Cache aggressively, batch operations, offer limited free tier |
+---
+9.
+Monetization Ideas
+| Model | Details |
+|-------|---------|
+| **Freemium** | 20 AI-structured notes/month free, unlimited for $6/month |
+| **Usage-based** | Pay per minute of voice transcription |
+| **Pro tier** | Advanced features (semantic search, quiz mode) at $10/month |
+| **Team/Education** | Bulk pricing for students, study groups |
+| **One-time purchase** | $30 lifetime for privacy-conscious users |
+**Recommendation:** Start with generous free tier to build habit, convert power users to Pro.
+---
+10.
+Wow Factors
+1. **"Magic Moment"** - First time a 3-minute voice ramble becomes perfectly organized notes in 5 seconds
+2. **"I forgot I wrote that"** - Surfacing a relevant old note exactly when you need it
+3. **Time Capsule** - "One year ago today, you were thinking about..." with your own notes
+4. **Voice Personality** - The AI learns your vocabulary and structuring preferences over time
+5. **Quick Capture Widget** - iOS widget for instant voice capture without opening app
+6. **Streak System** - "You've captured thoughts for 30 days straight"
+---
+**"Learning Journal" pivot:** Instead of general notes, focus specifically on **learning and studying**. Every note becomes a study card. The app quizzes you on your own material. Tracks what you're mastering vs. forgetting. This narrower focus could be more compelling than competing with Notion/Apple Notes directly.
+---
+For a buildable first version:
+1. Voice capture → transcription → LLM structuring
+2. Text capture → LLM structuring
+3. Simple list view of all notes
+4. Basic search
+5. One "wow moment": the instant transformation
+This is achievable and demonstrates the core value immediately.
